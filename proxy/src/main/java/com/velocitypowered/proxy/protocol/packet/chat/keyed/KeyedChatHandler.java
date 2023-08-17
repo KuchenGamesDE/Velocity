@@ -49,19 +49,21 @@ public class KeyedChatHandler implements
   }
 
   public static void invalidCancel(Logger logger, ConnectedPlayer player) {
-    logger.fatal("A plugin tried to cancel a signed chat message."
-        + " This is no longer possible in 1.19.1 and newer. "
-        + "Disconnecting player " + player.getUsername());
-    player.disconnect(Component.text("A proxy plugin caused an illegal protocol state. "
-        + "Contact your network administrator."));
+    // do not kick players on invalid chat message state
+    // logger.fatal("A plugin tried to cancel a signed chat message."
+    //     + " This is no longer possible in 1.19.1 and newer. "
+    //     + "Disconnecting player " + player.getUsername());
+    // player.disconnect(Component.text("A proxy plugin caused an illegal protocol state. "
+    //     + "Contact your network administrator."));
   }
 
   public static void invalidChange(Logger logger, ConnectedPlayer player) {
-    logger.fatal("A plugin tried to change a signed chat message. "
-        + "This is no longer possible in 1.19.1 and newer. "
-        + "Disconnecting player " + player.getUsername());
-    player.disconnect(Component.text("A proxy plugin caused an illegal protocol state. "
-        + "Contact your network administrator."));
+    // do not kick players on invalid edited chat message state
+    // logger.fatal("A plugin tried to change a signed chat message. "
+    //     + "This is no longer possible in 1.19.1 and newer. "
+    //     + "Disconnecting player " + player.getUsername());
+    // player.disconnect(Component.text("A proxy plugin caused an illegal protocol state. "
+    //     + "Contact your network administrator."));
   }
 
   @Override
@@ -107,6 +109,7 @@ public class KeyedChatHandler implements
       if (!chatResult.isAllowed()) {
         if (playerKey.getKeyRevision().compareTo(IdentifiedKey.Revision.LINKED_V2) >= 0) {
           // Bad, very bad.
+          // not too bad... just annoying
           invalidCancel(logger, player);
         }
         return null;
@@ -115,6 +118,7 @@ public class KeyedChatHandler implements
       if (chatResult.getMessage().map(str -> !str.equals(packet.getMessage())).orElse(false)) {
         if (playerKey.getKeyRevision().compareTo(IdentifiedKey.Revision.LINKED_V2) >= 0) {
           // Bad, very bad.
+          // not too bad... just annoying
           invalidChange(logger, player);
         } else {
           logger.warn("A plugin changed a signed chat message. The server may not accept it.");
