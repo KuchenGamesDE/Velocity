@@ -26,7 +26,6 @@ import com.velocitypowered.proxy.protocol.MinecraftPacket;
 import com.velocitypowered.proxy.protocol.packet.chat.ChatQueue;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Function;
-import net.kyori.adventure.text.Component;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -49,7 +48,7 @@ public class KeyedChatHandler implements
   }
 
   public static void invalidCancel(Logger logger, ConnectedPlayer player) {
-    // do not kick players on invalid chat message state
+    // do not kick players on invalid states
     // logger.fatal("A plugin tried to cancel a signed chat message."
     //     + " This is no longer possible in 1.19.1 and newer. "
     //     + "Disconnecting player " + player.getUsername());
@@ -58,7 +57,7 @@ public class KeyedChatHandler implements
   }
 
   public static void invalidChange(Logger logger, ConnectedPlayer player) {
-    // do not kick players on invalid edited chat message state
+    // do not kick players on invalid states
     // logger.fatal("A plugin tried to change a signed chat message. "
     //     + "This is no longer possible in 1.19.1 and newer. "
     //     + "Disconnecting player " + player.getUsername());
