@@ -87,3 +87,5 @@ jobs:
               --data-binary @$jar \
               "https://uploads.github.com/repos/${{ github.repository }}/releases/${{ steps.create_release.outputs.id }}/assets?name=$(basename $jar)"
           done
+
+
