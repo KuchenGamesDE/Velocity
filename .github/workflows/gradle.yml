@@ -3,7 +3,7 @@ name: Gradle Build and GitHub Release
 on:
   push:
     branches:
-      - main
+      - "dev/3.0.0"
 
 jobs:
   build:
