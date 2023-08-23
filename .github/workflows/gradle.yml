@@ -75,12 +75,12 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: build-artifacts
-          path: out/*.jar
+          path: proxy/build/libs/*.jar
 
       - name: Upload JARs as Release Assets
         id: upload-jars
         run: |
-          for jar in out/*.jar; do
+          for jar in proxy/build/libs/*.jar; do
             curl -X POST \
               -H "Authorization: token ${{ secrets.DEPLOY_KEY }}" \
               -H "Content-Type: application/java-archive" \
